@@ -18,12 +18,19 @@ def index():
         entreprise = request.form.get("entreprise", "")
         type_lettre = request.form["type_lettre"]
 
+        # Définir l'intro selon le type de lettre
+        if type_lettre == "lettre de motivation":
+            intro = f"Rédige une lettre de motivation pour un poste de {poste} dans le secteur {secteur}."
+        elif type_lettre == "candidature spontanée":
+            intro = f"Rédige une candidature spontanée pour un poste de {poste} dans le secteur {secteur}."
+
+        # Construction du prompt
         prompt = f"""
-Tu es un assistant RH. Génère une {type_lettre} pour un candidat nommé {nom},
-visant un poste de {poste} dans le secteur {secteur}.
-Voici ses compétences principales : {competences}.
-{f"L'entreprise visée est {entreprise}." if entreprise else ""}
-Fais une lettre professionnelle, motivée, et personnalisée.
+Tu es un assistant RH. {intro}
+Le candidat s'appelle {nom}.
+Voici ses compétences : {competences}.
+{f"Il souhaite postuler chez {entreprise}." if entreprise else ""}
+Fais une lettre professionnelle, motivée, fluide et adaptée à la situation.
 """
 
         response = openai.ChatCompletion.create(
