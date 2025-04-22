@@ -1,0 +1,49 @@
+body {
+    background-color: #111;
+    color: #eee;
+    font-family: 'Courier New', monospace;
+    padding: 2rem;
+}
+
+h1, h2 {
+    color: #00ff99;
+    text-shadow: 0 0 5px #00ff99;
+}
+
+input, textarea, select {
+    background-color: #222;
+    color: #0f0;
+    border: 1px solid #00ff99;
+    border-radius: 8px;
+    padding: 0.6em;
+    margin-bottom: 1em;
+    width: 100%;
+}
+
+input::placeholder, textarea::placeholder {
+    color: #666;
+}
+
+button {
+    background-color: #00ff99;
+    border: none;
+    color: #000;
+    font-weight: bold;
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+button:hover {
+    background-color: #00cc77;
+}
+
+pre {
+    background-color: #1a1a1a;
+    border-left: 4px solid #00ff99;
+    padding: 1rem;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    border-radius: 8px;
+}
