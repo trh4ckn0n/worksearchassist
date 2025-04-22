@@ -3,6 +3,7 @@ from flask import Flask, render_template, request
 from dotenv import load_dotenv
 import openai
 
+# Charger les variables d'environnement
 load_dotenv()
 openai.api_key = os.getenv("OPENAI_API_KEY")
 
@@ -18,19 +19,26 @@ def index():
         entreprise = request.form.get("entreprise", "")
         type_lettre = request.form["type_lettre"]
 
-        # Définir l'intro selon le type de lettre
+        # Adapter le ton et la structure selon le type
         if type_lettre == "lettre de motivation":
-            intro = f"Rédige une lettre de motivation pour un poste de {poste} dans le secteur {secteur}."
-        elif type_lettre == "candidature spontanée":
-            intro = f"Rédige une candidature spontanée pour un poste de {poste} dans le secteur {secteur}."
+            intro = f"""
+Rédige une **lettre de motivation** professionnelle, personnalisée, pour un poste de {poste} dans le secteur {secteur}.
+Le ton doit être motivé, formel, structuré, et montrer un fort intérêt pour ce poste spécifique."""
+        else:
+            intro = f"""
+Rédige une **candidature spontanée** proactive, convaincante, pour un poste de {poste} dans le secteur {secteur}.
+Le candidat ne répond pas à une offre : il souhaite démontrer la valeur qu'il peut apporter à l'entreprise."""
 
-        # Construction du prompt
         prompt = f"""
-Tu es un assistant RH. {intro}
-Le candidat s'appelle {nom}.
-Voici ses compétences : {competences}.
-{f"Il souhaite postuler chez {entreprise}." if entreprise else ""}
-Fais une lettre professionnelle, motivée, fluide et adaptée à la situation.
+Tu es un expert RH chargé d'aider les candidats à rédiger leur lettre.
+
+{intro}
+Nom du candidat : {nom}
+Compétences principales : {competences}
+{f"Entreprise ciblée : {entreprise}." if entreprise else ""}
+
+Structure la lettre avec une belle introduction, un développement clair et une conclusion efficace.
+Utilise un ton fluide, professionnel et accrocheur. Ne dépasse pas 400 mots.
 """
 
         response = openai.ChatCompletion.create(
@@ -47,4 +55,4 @@ Fais une lettre professionnelle, motivée, fluide et adaptée à la situation.
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
-    app.run(debug=False, host="0.0.0.0", port=port)
+    app.run(host="0.0.0.0", port=port)
