@@ -3,11 +3,24 @@ body {
     color: #eee;
     font-family: 'Courier New', monospace;
     padding: 2rem;
+    max-width: 800px;
+    margin: auto;
 }
 
-h1, h2 {
+h1 {
     color: #00ff99;
     text-shadow: 0 0 5px #00ff99;
+    margin-bottom: 1rem;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    margin-top: 1rem;
+    color: #ccc;
 }
 
 input, textarea, select {
@@ -16,20 +29,16 @@ input, textarea, select {
     border: 1px solid #00ff99;
     border-radius: 8px;
     padding: 0.6em;
-    margin-bottom: 1em;
-    width: 100%;
-}
-
-input::placeholder, textarea::placeholder {
-    color: #666;
+    margin-top: 0.4em;
 }
 
 button {
+    margin-top: 2rem;
     background-color: #00ff99;
-    border: none;
     color: #000;
     font-weight: bold;
     padding: 10px 20px;
+    border: none;
     border-radius: 8px;
     cursor: pointer;
     transition: background 0.3s ease;
@@ -46,4 +55,11 @@ pre {
     white-space: pre-wrap;
     word-wrap: break-word;
     border-radius: 8px;
+}
+
+a {
+    display: inline-block;
+    margin-top: 2rem;
+    color: #00ff99;
+    text-decoration: none;
 }
